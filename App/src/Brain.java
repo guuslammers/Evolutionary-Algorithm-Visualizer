@@ -46,6 +46,31 @@ public class Brain {
         }
     }
 
+    public void incrementStep() {
+        /*
+        Increments step.
+        */
+        this.step++;
+    }
+
+    public boolean accelerationDirectionsAvailable() {
+        /*
+        Returns true if there are accelerationDirections left in the brain.
+        */
+        if(this.accelerationDirections.length > this.step) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Vector2D getNextAccelerationDirection() {
+        /*
+        Returns the next accelerationDirection.
+        */
+        return this.accelerationDirections[this.step];
+    }
+
     private double generateRandomDoubleInRange(double min, double max) {
         /*
         Generates a random double between min and max.
