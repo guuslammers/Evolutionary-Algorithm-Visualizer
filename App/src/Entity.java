@@ -10,19 +10,12 @@ public class Entity {
     double fitness;
     boolean goalReached;
 
-    Entity(Vector2D startPosition, boolean bestEntity, int radius) {
+    Entity(Vector2D startPosition, boolean bestEntity) {
         this.brain = new Brain(1000);
         this.bestEntity = bestEntity;
         this.alive = true;
         this.fitness = 0;
         this.goalReached = false;
-    }
-
-    public void killEntity() {
-        /*
-        Kills entity by setting alive to false.
-        */
-        this.alive = false;
     }
 
     private void move() {
@@ -51,6 +44,46 @@ public class Entity {
         /*
         Controls the updating of the entity's state. This includes moving the entity, chec
         */
+    }
+
+    public void calculateFitness(Vector2D goalPosition) {
+        /*
+        Calculates the fitness of the entity.
+        */
+        this.fitness = 1 / (this.position.getDistanceTo(goalPosition));
+    }
+
+    public void killEntity() {
+        /*
+        Kills entity by setting alive to false.
+        */
+        this.alive = false;
+    }
+
+    public boolean isAlive() {
+        /*
+        Returns true if the entity is alive, false otherwise.
+        */
+        if(this.alive) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void cloneBrainDirectionsFrom(Brain brain) {
+        /*
+        Clones the passed in brain's accelerationDirections into this entities brain's accelerationDirections.
+        */
+        this.brain.setBrainAccelerationDirection(brain.deepCopyAccelerationDirections());
+    }
+
+    public double getFitness() {
+        return this.fitness;
+    }
+
+    public Brain getBrain() {
+        return this.brain;
     }
 
 }

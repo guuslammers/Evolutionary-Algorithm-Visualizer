@@ -47,6 +47,13 @@ public class Vector2D {
         this.scaleVector(magnitude);
     }
 
+    public double getDistanceTo(Vector2D vector) {
+        /*
+        Gets the distance between this Vector2D andd the passed in Vector2D.
+        */
+        return Math.sqrt(Math.pow((this.x - vector.getX()), 2) + Math.pow((this.y - vector.getY()), 2));
+    }
+
     public double getX() {
         return this.x;
     }

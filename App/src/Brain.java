@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Vector;
 
 public class Brain {
 
@@ -69,6 +70,24 @@ public class Brain {
         Returns the next accelerationDirection.
         */
         return this.accelerationDirections[this.step];
+    }
+
+    public void setBrainAccelerationDirection(Vector2D[] accelerationDirections) {
+        /*
+        Overwrites this brains acceleration directions with the passed in acceleration directions.
+        */
+        this.accelerationDirections = accelerationDirections;
+    }
+
+    public Vector2D[] deepCopyAccelerationDirections() {
+        /*
+        Deep copy this brains accelerationDirections and return the deep copy.
+        */
+        Vector2D[] deepCopy = new Vector2D[this.accelerationDirections.length];
+        for(int i = 0; i < this.accelerationDirections.length; i++) {
+            deepCopy[i] = new Vector2D(this.accelerationDirections[i].getX(), this.accelerationDirections[i].getY());
+        }
+        return deepCopy;
     }
 
     private double generateRandomDoubleInRange(double min, double max) {
