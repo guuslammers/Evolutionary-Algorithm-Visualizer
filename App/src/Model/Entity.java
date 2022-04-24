@@ -1,7 +1,8 @@
-public class Entity {
+package Model;
+public class Entity implements ICircle {
     
     int TERMINAL_VELOCITY = 5;
-    int ENTITY_RADIUS = 5;
+    double ENTITY_RADIUS = 5.0;
 
     Brain brain;
     Vector2D position, velocity, acceleration;
@@ -18,7 +19,7 @@ public class Entity {
         this.goalReached = false;
     }
 
-    private void move() {
+    public void move() {
         /*
         Moves the entitity using the brains next accelerationDirection vector. If no
         direction are available kill the entity.
@@ -38,12 +39,6 @@ public class Entity {
         }
         // Update position.
         this.position.addToVector(this.velocity);
-    }
-
-    public void update() {
-        /*
-        Controls the updating of the entity's state. This includes moving the entity, chec
-        */
     }
 
     public void calculateFitness(Vector2D goalPosition) {
@@ -84,6 +79,18 @@ public class Entity {
 
     public Brain getBrain() {
         return this.brain;
+    }
+
+    public Vector2D getPosition() {
+        return this.position;
+    }
+
+    public Double getRadius() {
+        return this.ENTITY_RADIUS;
+    }
+    
+    public void setGoalReached() {
+        this.goalReached = true;
     }
 
 }

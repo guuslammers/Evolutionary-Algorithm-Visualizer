@@ -1,3 +1,4 @@
+package Model;
 import java.util.Random;
 
 public class Population {
@@ -13,7 +14,22 @@ public class Population {
         this.generation = 0;
     }
 
-    private boolean isPopulationDead() {
+    public void updatePopulation() {
+        /*
+        Updates the entire population by moving all the alive Entities.
+        */
+        for(Entity entity : population) {
+            if(entity.isAlive()) {
+                entity.move();
+            }
+        }
+    }
+
+    public Entity[] getPopulation() {
+        return this.population;
+    }
+
+    public boolean isPopulationDead() {
         /*
         Returns true if the entire population is dead, false otherwise.
         */
@@ -36,6 +52,12 @@ public class Population {
     }
 
     public void naturalSelection() {
+        /*
+
+        */
+    }
+
+    public void mutate() {
         /*
 
         */

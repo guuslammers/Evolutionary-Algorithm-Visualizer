@@ -1,7 +1,0 @@
-public class Goal {
-    
-    Goal() {
-        
-    }
-
-}
