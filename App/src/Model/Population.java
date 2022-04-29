@@ -80,12 +80,16 @@ public class Population {
         // Get a random number between 0 and fitnessSum. 
         double random = generateRandomDoubleInRange(0, this.fitnessSum);
         double sum = 0;
+        int index = 0;
         for(int i = 0; i < this.population.length; i++) {
             sum += this.population[i].getFitness();
             if(sum > random) {
-                return this.population[i];
+                index = i;
+                break;
             }
         }
+
+        return this.population[index];
     }
 
     private Entity getChildEntity(Entity parent, boolean bestEntity) {

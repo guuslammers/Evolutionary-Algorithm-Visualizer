@@ -1,5 +1,18 @@
+import Model.Model;
+import View.View;
+
 public class App {
+    
+    static int WINDOW_WIDTH = 1000;
+    static int WINDOW_HEIGHT = 750;
+
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Model model = new Model(WINDOW_WIDTH, WINDOW_HEIGHT);    
+        View view = new View(WINDOW_WIDTH, WINDOW_HEIGHT);
+        Controller controller = new Controller(model, view);
+
+        view.setVisible(true);
+        view.getVisualizationPanel().check();
     }
+
 }

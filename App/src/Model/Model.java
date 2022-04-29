@@ -15,7 +15,7 @@ public class Model {
 
     List<Obstacle> obstacles = new ArrayList<Obstacle>();
 
-    Model(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
+    public Model(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
         this.WINDOW_WIDTH = WINDOW_WIDTH;
         this.WINDOW_HEIGHT = WINDOW_HEIGHT;
     }
