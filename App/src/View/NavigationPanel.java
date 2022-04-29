@@ -14,7 +14,6 @@ public class NavigationPanel extends JPanel {
 
     NavigationPanel() {
         this.setLayout(new GridLayout());
-        this.setBackground(Color.black);
 
         this.startButton = new JButton("Start");
         this.restartButton = new JButton("Restart");

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class VisualizationPanel extends JPanel {
     
     VisualizationPanel() {
-        this.setBackground(Color.blue);
+        this.setBackground(Color.white);
     }
 
     public void addMyMouseListener(MouseAdapter mouseListener) {
