@@ -11,8 +11,6 @@ public class App {
         View view = new View(WINDOW_WIDTH, WINDOW_HEIGHT);
         new Controller(model, view);
 
-        //test
-
         view.setVisible(true);
         view.getVisualizationPanel().check();
     }
