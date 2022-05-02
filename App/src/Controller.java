@@ -4,7 +4,7 @@ import View.View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 
 public class Controller {
@@ -22,7 +22,9 @@ public class Controller {
 
         this.view.getNavigationPanel().addStartButtonListener(new StartButtonListener());
         this.view.getNavigationPanel().addRestartButtonListener(new RestartButtonListener());
+        
         this.view.getVisualizationPanel().addMouseListener(new MyMouseListener());
+        this.view.getVisualizationPanel().addMouseMotionListener(new MyMouseMotionListener());
     }
 
     class StartButtonListener implements ActionListener {
@@ -70,6 +72,16 @@ public class Controller {
         public void mouseExited (MouseEvent e)
         {
             System.out.println("Exited");
+        }
+    }
+
+    class MyMouseMotionListener extends MouseMotionAdapter {
+        public void mouseMoved(MouseEvent e) {
+            System.out.println("Moved");
+        }
+    
+        public void mouseDragged(MouseEvent e) {
+            System.out.println("Dragged");
         }
     }
 

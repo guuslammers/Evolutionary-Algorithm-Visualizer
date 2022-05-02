@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Model model = new Model(WINDOW_WIDTH, WINDOW_HEIGHT);    
         View view = new View(WINDOW_WIDTH, WINDOW_HEIGHT);
-        Controller controller = new Controller(model, view);
+        new Controller(model, view);
 
         view.setVisible(true);
         view.getVisualizationPanel().check();
