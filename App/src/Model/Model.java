@@ -11,6 +11,10 @@ public class Model {
     Integer populationSize = 50;
     Population population;
     
+    double startPositionRadius = 5;
+    StartPosition startPosition;
+
+    double goalRadius = 5;
     Goal goal;
 
     List<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -25,11 +29,11 @@ public class Model {
         Moves the simulation one tick forward. This includes updating the entire population, checking if any Entities have died,
         and if the generation is dead. If the current generation is dead a new generation will be created.
         */  
-        // update entities and check collisions
+        // update entities and check collisions.
         this.population.updatePopulation();
         Entity[] entities = this.population.getPopulation();
         for(Entity entity : entities) {
-            // skip entity if it is already dead
+            // skip entity if it is already dead.
             if(entity.isAlive()) {
                 // Check if entity collided with the goal.
                 if(circleCollide(entity, this.goal)) {
@@ -100,15 +104,61 @@ public class Model {
         return false;
     }
 
-    
-
     public Goal getGoal() {
         return this.goal;
     }
 
     public void setGoal(double x, double y) {
-        Goal newGoal = new Goal(new Vector2D(x, y));
+        Goal newGoal = new Goal(new Vector2D(x, y), this.goalRadius);
         this.goal = newGoal;
+    }
+
+    public void removeGoal() {
+        this.goal = null;
+    }
+
+    public StartPosition getStartPosition() {
+        return this.startPosition;
+    }
+
+    public void setStartPosition(double x, double y) {
+        StartPosition newStartPosition = new StartPosition(new Vector2D(x, y), this.startPositionRadius);
+        this.startPosition = newStartPosition;
+    }
+
+    public void removeStartPosition() {
+        this.startPosition = null;
+    } 
+
+    public void addObstacle(double x, double y, double radius) {
+        this.obstacles.add(new Obstacle(new Vector2D(x, y), radius));
+    }
+
+    public void clearObstacles() {
+        this.obstacles.clear();
+    }
+
+    public List<ICircle> getAllElements() {
+        /*
+        Returns a list of all the ICircle objects present in the simulation.
+        */
+        List<ICircle> elements = new ArrayList<ICircle>();
+        if(this.startPosition != null) {
+            elements.add(this.startPosition);
+        }
+        if(this.goal != null) {
+            elements.add(this.goal);
+        }
+        if(this.obstacles.size() > 0) {
+            elements.addAll(this.obstacles);
+        }
+        if(this.population!= null) {
+            for(Entity entity: this.population.getPopulation()) {
+                elements.add(entity);
+            }  
+        }
+
+        return elements;
     }
 
 }

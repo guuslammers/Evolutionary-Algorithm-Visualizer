@@ -1,11 +1,11 @@
 package Model;
 
-public class Goal implements ICircle {
+public class StartPosition implements ICircle {
     
     private Vector2D position;
     private double radius;
 
-    Goal(Vector2D position, double radius) {
+    StartPosition(Vector2D position, double radius) {
         this.position = position;
         this.radius = radius;
     }
@@ -17,5 +17,4 @@ public class Goal implements ICircle {
     public Double getRadius() {
         return this.radius;
     }
-
 }
