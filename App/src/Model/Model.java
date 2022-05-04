@@ -115,8 +115,13 @@ public class Model {
     }
 
     public void setGoal(double x, double y) {
+        /*
+        Creates new goal if it is not colliding with the walls.
+        */
         Goal newGoal = new Goal(new Vector2D(x, y), this.goalRadius);
-        this.goal = newGoal;
+        if(!wallCollide(newGoal)) {
+            this.goal = newGoal;
+        }
     }
 
     public void clearGoal() {
@@ -128,8 +133,13 @@ public class Model {
     }
 
     public void setStartPosition(double x, double y) {
+        /*
+        Creates new start position if it is not colliding with the walls.
+        */
         StartPosition newStartPosition = new StartPosition(new Vector2D(x, y), this.startPositionRadius);
-        this.startPosition = newStartPosition;
+        if(!wallCollide(newStartPosition)) {
+            this.startPosition = newStartPosition;
+        }
     }
 
     public void clearStartPosition() {
