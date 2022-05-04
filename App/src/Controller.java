@@ -77,15 +77,21 @@ public class Controller {
     class StartButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            /*
+            Starts and stops the simulation depending on if it is already running or not.
+            Does not allow the simulation to start unless both startPosition and goal are not null.
+            */
             if(running) {
                 view.getNavigationPanel().enableRestartButton();
                 view.getNavigationPanel().changeToStartButton();
                 running = false;
             }
             else {
-                view.getNavigationPanel().disableRestartButton();
-                view.getNavigationPanel().changeToStopButton();
-                running = true;
+                if(model.getStartPosition() != null && model.getGoal() != null) {
+                    view.getNavigationPanel().disableRestartButton();
+                    view.getNavigationPanel().changeToStopButton();
+                    running = true;
+                }
             }
         }
 
