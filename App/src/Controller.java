@@ -109,29 +109,29 @@ public class Controller {
     class MyMouseListener extends MouseAdapter {
         public void mouseClicked (MouseEvent e)
         {
-            if(model.getStartPosition() == null) {
-                model.setStartPosition(e.getX(), e.getY());
-                updateVisualization();
+            /*
+            Sets start position and goal position if they havent been set yet.
+            */
+            if(!running) {
+                if(model.getStartPosition() == null) {
+                    model.setStartPosition(e.getX(), e.getY());
+                    updateVisualization();
+                }
+                else if(model.getGoal() == null) {
+                    model.setGoal(e.getX(), e.getY());
+                    updateVisualization();
+                }
             }
-            else if(model.getGoal() == null) {
-                model.setGoal(e.getX(), e.getY());
-                updateVisualization();
-            }
-
-            // if(e.getButton() == MouseEvent.BUTTON1) {
-            //     System.out.println("Left");
-            // }
-            // else if(e.getButton() == MouseEvent.BUTTON3) {
-            //     System.out.println("Right");
-            // }
         }
         public void mousePressed (MouseEvent e)
         {
             /*
             Sets temporaryObstacle center if start position and goal position have been set.
             */
-            if(model.getStartPosition() != null && model.getGoal() != null) {
-                temporaryObstacleCenter = new Vector2D(e.getX(), e.getY());
+            if(!running) {  
+                if(model.getStartPosition() != null && model.getGoal() != null) {
+                    temporaryObstacleCenter = new Vector2D(e.getX(), e.getY());
+                }
             }
         }
         public void mouseReleased (MouseEvent e)
@@ -139,13 +139,15 @@ public class Controller {
             /*
             create obstacle in model, clears temporary obstacle variables, and updates visualization.
             */
-            if(temporaryObstacleCenter != null) {
-                Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
-                double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
-                model.addObstacle(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius);         
-                temporaryObstacle = null;
-                temporaryObstacleCenter = null;
-                updateVisualization();
+            if(!running) {
+                if(temporaryObstacleCenter != null) {
+                    Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
+                    double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
+                    model.addObstacle(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius);         
+                    temporaryObstacle = null;
+                    temporaryObstacleCenter = null;
+                    updateVisualization();
+                }
             }
         }
     }
@@ -155,12 +157,14 @@ public class Controller {
             /*
             Updates temporary obstacle and updates the visualization.
             */
-            if(temporaryObstacleCenter != null) {
-                System.out.println("Dragged");
-                Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
-                double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
-                temporaryObstacle = new Circle2D(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius, temporaryObstacleColor);
-                updateVisualization();
+            if(!running) {
+                if(temporaryObstacleCenter != null) {
+                    System.out.println("Dragged");
+                    Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
+                    double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
+                    temporaryObstacle = new Circle2D(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius, temporaryObstacleColor);
+                    updateVisualization();
+                }
             }
         }
     }
