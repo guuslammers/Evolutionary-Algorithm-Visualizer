@@ -11,7 +11,19 @@ public class Population {
 
     Population(Vector2D startPosition, int populationSize) {
         this.startPosition = startPosition;
+        this.population = new Entity[populationSize];
         this.generation = 0;
+
+        createPopulation();
+    }
+
+    private void createPopulation() {
+        /*
+        Creates a new population.
+        */
+        for(int i = 0; i < this.population.length; i++) {
+            this.population[i] = new Entity(startPosition, false);
+        }
     }
 
     public void updatePopulation() {

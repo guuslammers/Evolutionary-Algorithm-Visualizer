@@ -2,7 +2,7 @@ package Model;
 public class Entity implements ICircle {
     
     int TERMINAL_VELOCITY = 5;
-    double ENTITY_RADIUS = 5.0;
+    double ENTITY_RADIUS = 5;
 
     Brain brain;
     Vector2D position, velocity, acceleration;
@@ -11,8 +11,9 @@ public class Entity implements ICircle {
     double fitness;
     boolean goalReached;
 
-    Entity(Vector2D startPosition, boolean bestEntity) {
+    public Entity(Vector2D startPosition, boolean bestEntity) {
         this.brain = new Brain(1000);
+        this.position = startPosition;
         this.bestEntity = bestEntity;
         this.alive = true;
         this.fitness = 0;

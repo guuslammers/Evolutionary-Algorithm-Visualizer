@@ -14,7 +14,7 @@ public class Model {
     double startPositionRadius = 5;
     StartPosition startPosition;
 
-    double goalRadius = 5;
+    double goalRadius = 10;
     Goal goal;
 
     List<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -63,12 +63,11 @@ public class Model {
         }
     }
 
-    public void resetPopulationStartPosition(double x, double y) {
+    public void createNewPopulation() {
         /*
-        Creates a new population with a new start position.
+        Creates a new population at startposition.
         */
-        Vector2D newStartPosition = new Vector2D(x, y);
-        Population newPopulation = new Population(newStartPosition, this.populationSize);
+        Population newPopulation = new Population(this.startPosition.getPosition(), this.populationSize);
         this.population = newPopulation;
     }
 
@@ -76,13 +75,15 @@ public class Model {
         this.population = null;
     }
 
+    public Population getPopulation() {
+        return this.population;
+    }
+
     private boolean circleCollide(ICircle circle1, ICircle circle2) {
         /*
         Returns true if circle1 and circle2 intersect, false otherwise.
         */
         double distanceBetweenCenters = circle1.getPosition().getDistanceTo(circle2.getPosition());
-        System.out.println(distanceBetweenCenters);
-        System.out.println(circle1.getRadius() + circle2.getRadius());
         if(distanceBetweenCenters < (circle1.getRadius() + circle2.getRadius())) {
             return true;
         }
@@ -152,7 +153,6 @@ public class Model {
         */
         Obstacle obstacle = new Obstacle(new Vector2D(x, y), radius);
         if(!circleCollide(obstacle, this.startPosition) && !circleCollide(obstacle, this.goal)) {
-            System.out.println("Here");
             this.obstacles.add(new Obstacle(new Vector2D(x, y), radius));
         }
     }

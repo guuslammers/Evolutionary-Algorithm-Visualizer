@@ -57,10 +57,7 @@ public class Controller {
         // create visualization elements for the view
         for(ICircle circle : elements) {
             // check the type of the circle and change color accordingly
-            if(circle instanceof Entity) {
-
-            }
-            else if(circle instanceof Obstacle) {
+            if(circle instanceof Obstacle) {
                 this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.red));
             }
             else if(circle instanceof StartPosition) {
@@ -68,6 +65,9 @@ public class Controller {
             }
             else if(circle instanceof Goal) {
                 this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.green));
+            }
+            else if(circle instanceof Entity) {
+                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.pink));
             }
         }
         // redraw window
@@ -91,6 +91,10 @@ public class Controller {
                     view.getNavigationPanel().disableRestartButton();
                     view.getNavigationPanel().changeToStopButton();
                     running = true;
+                    if(model.getPopulation() == null) {
+                        model.createNewPopulation();
+                    }
+                    updateVisualization();
                 }
             }
         }
@@ -165,7 +169,6 @@ public class Controller {
             */
             if(!running) {
                 if(temporaryObstacleCenter != null) {
-                    System.out.println("Dragged");
                     Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
                     double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
                     temporaryObstacle = new Circle2D(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius, temporaryObstacleColor);
