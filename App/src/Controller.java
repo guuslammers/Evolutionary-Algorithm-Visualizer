@@ -94,7 +94,14 @@ public class Controller {
     class RestartButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Restart");
+            /*
+            Clears the entire visualization and rerenders.
+            */
+            model.clearPopulation();
+            model.clearStartPosition();
+            model.clearGoal();
+            model.clearObstacles();
+            updateVisualization();
         }
 
     }

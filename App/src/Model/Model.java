@@ -72,6 +72,10 @@ public class Model {
         this.population = newPopulation;
     }
 
+    public void clearPopulation() {
+        this.population = null;
+    }
+
     private boolean circleCollide(ICircle circle1, ICircle circle2) {
         /*
         Returns true if circle1 and circle2 intersect, false otherwise.
@@ -115,7 +119,7 @@ public class Model {
         this.goal = newGoal;
     }
 
-    public void removeGoal() {
+    public void clearGoal() {
         this.goal = null;
     }
 
@@ -128,7 +132,7 @@ public class Model {
         this.startPosition = newStartPosition;
     }
 
-    public void removeStartPosition() {
+    public void clearStartPosition() {
         this.startPosition = null;
     } 
 
