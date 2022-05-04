@@ -1,4 +1,5 @@
 import Model.Model;
+import Model.Obstacle;
 import Model.StartPosition;
 import Model.Vector2D;
 import View.View;
@@ -13,6 +14,8 @@ import java.util.Vector;
 import java.awt.event.MouseEvent;
 
 import Model.Vector2D;
+import Model.Entity;
+import Model.Goal;
 import Model.ICircle;
 import Model.StartPosition;
 
@@ -43,16 +46,29 @@ public class Controller {
     }
 
     private void updateVisualization() {
+        // reset visualization
+        this.view.getVisualizationPanel().clearCircles();
+        // check if there is a temorary obstacle that needs to be drawn
+        if(this.temporaryObstacle != null) {
+            this.view.getVisualizationPanel().addCircle(this.temporaryObstacle);
+        }
         // get all visualization elements from the model
         List<ICircle> elements = this.model.getAllElements();
         // create visualization elements for the view
         for(ICircle circle : elements) {
             // check the type of the circle and change color accordingly
-            this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.blue));
-        }
-        // check if there is a temorary obstacle that needs to be drawn
-        if(this.temporaryObstacle != null) {
-            this.view.getVisualizationPanel().addCircle(this.temporaryObstacle);
+            if(circle instanceof Entity) {
+
+            }
+            else if(circle instanceof Obstacle) {
+                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.red));
+            }
+            else if(circle instanceof StartPosition) {
+                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.blue));
+            }
+            else if(circle instanceof Goal) {
+                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.green));
+            }
         }
         // redraw window
         this.view.getVisualizationPanel().refreshPanel();
@@ -108,7 +124,6 @@ public class Controller {
             Sets temporaryObstacle center if start position and goal position have been set.
             */
             if(model.getStartPosition() != null && model.getGoal() != null) {
-                System.out.println("Pressed: Setting temporaryObstacleCenter");
                 temporaryObstacleCenter = new Vector2D(e.getX(), e.getY());
             }
         }
@@ -120,11 +135,9 @@ public class Controller {
             if(temporaryObstacleCenter != null) {
                 Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
                 double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
-                model.addObstacle(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius);
-                
+                model.addObstacle(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius);         
                 temporaryObstacle = null;
                 temporaryObstacleCenter = null;
-
                 updateVisualization();
             }
         }
@@ -136,6 +149,7 @@ public class Controller {
             Updates temporary obstacle and updates the visualization.
             */
             if(temporaryObstacleCenter != null) {
+                System.out.println("Dragged");
                 Vector2D mousePosition = new Vector2D(e.getX(), e.getY());
                 double radius = temporaryObstacleCenter.getDistanceTo(mousePosition);
                 temporaryObstacle = new Circle2D(temporaryObstacleCenter.getX(), temporaryObstacleCenter.getY(), radius, temporaryObstacleColor);

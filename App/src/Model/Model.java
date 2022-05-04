@@ -76,7 +76,9 @@ public class Model {
         /*
         Returns true if circle1 and circle2 intersect, false otherwise.
         */
-        double distanceBetweenCenters = Math.sqrt(Math.pow((circle1.getPosition().getX() + circle2.getPosition().getX()), 2) + Math.pow((circle1.getPosition().getY() + circle2.getPosition().getY()), 2));
+        double distanceBetweenCenters = circle1.getPosition().getDistanceTo(circle2.getPosition());
+        System.out.println(distanceBetweenCenters);
+        System.out.println(circle1.getRadius() + circle2.getRadius());
         if(distanceBetweenCenters < (circle1.getRadius() + circle2.getRadius())) {
             return true;
         }
@@ -131,7 +133,14 @@ public class Model {
     } 
 
     public void addObstacle(double x, double y, double radius) {
-        this.obstacles.add(new Obstacle(new Vector2D(x, y), radius));
+        /*
+        Creates new obstacle only if the start position and goal are not inside it.
+        */
+        Obstacle obstacle = new Obstacle(new Vector2D(x, y), radius);
+        if(!circleCollide(obstacle, this.startPosition) && !circleCollide(obstacle, this.goal)) {
+            System.out.println("Here");
+            this.obstacles.add(new Obstacle(new Vector2D(x, y), radius));
+        }
     }
 
     public void clearObstacles() {
