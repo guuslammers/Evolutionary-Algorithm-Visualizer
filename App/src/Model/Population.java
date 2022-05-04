@@ -129,6 +129,10 @@ public class Population {
         this.bestEntity = this.population[bestIndex];
     }
 
+    public int getGeneration() {
+        return this.generation;
+    }
+
     private double generateRandomDoubleInRange(double min, double max) {
         /*
         Generates a random double between min and max.
