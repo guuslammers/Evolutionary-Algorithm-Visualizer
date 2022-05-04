@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.BorderLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class VisualizationPanel extends JPanel {
 
     List<Circle2D> circles;
+
+    JLabel generationLabel;
     
     VisualizationPanel() {
         circles = new ArrayList<Circle2D>();
@@ -46,6 +51,21 @@ public class VisualizationPanel extends JPanel {
     
     public void clearCircles() {
         this.circles.clear();
+    }
+
+    public void createGenerationLabel(String generation) {
+        /*
+        Instantiates generationLabel with a generation of 0 and centers it in the middle of the screen.
+        */
+        this.generationLabel = new JLabel(generation);
+        this.generationLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 25));
+        this.generationLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.generationLabel.setVerticalAlignment(JLabel.CENTER);
+        this.add(this.generationLabel, BorderLayout.CENTER);
+    }
+
+    public void clearGenerationLabel() {
+        this.remove(this.generationLabel);
     }
 
     public void addMyMouseListener(MouseAdapter mouseListener) {

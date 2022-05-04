@@ -67,6 +67,8 @@ public class Controller {
                 this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.pink));
             }
         }
+        // update generation label
+        
         // redraw window
         this.view.getVisualizationPanel().refreshPanel();
     }
@@ -90,6 +92,7 @@ public class Controller {
                     running = true;
                     if(model.getPopulation() == null) {
                         model.createNewPopulation();
+                        view.getVisualizationPanel().createGenerationLabel("Generation: " + model.getPopulation().getGeneration());
                     }
                     updateVisualization();
                 }
@@ -108,6 +111,7 @@ public class Controller {
             model.clearStartPosition();
             model.clearGoal();
             model.clearObstacles();
+            view.getVisualizationPanel().clearGenerationLabel();
             updateVisualization();
         }
 
