@@ -17,7 +17,6 @@ public class VisualizationPanel extends JPanel {
     List<Circle2D> circles;
     
     VisualizationPanel() {
-        this.setBackground(Color.white);
         circles = new ArrayList<Circle2D>();
     }
 
@@ -26,7 +25,7 @@ public class VisualizationPanel extends JPanel {
         Paints all componenents onto JPanel.
         */
         Graphics2D g2D = (Graphics2D) g; 
-        
+
         for(Circle2D circle : circles) {
             g2D.setColor(circle.getColor());
             g2D.fill(circle.getCircle());
