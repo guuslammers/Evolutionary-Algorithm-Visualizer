@@ -14,6 +14,8 @@ public class Entity implements ICircle {
     public Entity(Vector2D startPosition, boolean bestEntity) {
         this.brain = new Brain(1000);
         this.position = startPosition;
+        this.velocity = new Vector2D(0, 0);
+        this.acceleration = new Vector2D(0, 0);
         this.bestEntity = bestEntity;
         this.alive = true;
         this.fitness = 0;
@@ -65,6 +67,13 @@ public class Entity implements ICircle {
         }
 
         return false;
+    }
+
+    public boolean isBestEntity() {
+        /*
+        Returns true if the bestEntity is true.
+        */
+        return this.bestEntity;
     }
 
     public void cloneBrainDirectionsFrom(Brain brain) {

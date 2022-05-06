@@ -67,12 +67,28 @@ public class Population {
         /*
 
         */
+        Entity[] newPopulation = new Entity[this.population.length]; 
+        this.calculateFitnessSum();
+        for(int i = 0; i < this.population.length - 1; i++) {
+            Entity parent = this.selectParent();
+            newPopulation[i] = getChildEntity(parent, false);
+        }
+        // Find and add best entity.
+        this.setBestEntity();
+        newPopulation[newPopulation.length - 1] = getChildEntity(this.bestEntity, true);
+        // overwrite population with new generation.
+        this.population = newPopulation;
     }
 
     public void mutate() {
         /*
-
+        Mutates all of the entities in the poopulation except the best entity. 
         */
+        for(Entity entity : population) {
+            if(!entity.isBestEntity()) {
+                entity.getBrain().mutateAccelerationDirections();;
+            }
+        }
     }
 
     private void calculateFitnessSum() {

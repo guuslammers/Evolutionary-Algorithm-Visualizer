@@ -17,13 +17,18 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller {
     
+    int SIMULATION_SPEED = 50;
+
     Model model;
     View view;
 
     boolean running;
+    Timer timer;
 
     Vector2D temporaryObstacleCenter;
     Color temporaryObstacleColor = Color.orange;
@@ -68,9 +73,25 @@ public class Controller {
             }
         }
         // update generation label
-        
+
         // redraw window
         this.view.getVisualizationPanel().refreshPanel();
+    }
+
+    private void createSimulationTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    model.updateSimulation();
+                    updateVisualization();
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+          }, this.SIMULATION_SPEED, this.SIMULATION_SPEED);
     }
 
     class StartButtonListener implements ActionListener {
@@ -84,6 +105,7 @@ public class Controller {
                 view.getNavigationPanel().enableRestartButton();
                 view.getNavigationPanel().changeToStartButton();
                 running = false;
+                timer.cancel();
             }
             else {
                 if(model.getStartPosition() != null && model.getGoal() != null) {
@@ -95,6 +117,7 @@ public class Controller {
                         view.getVisualizationPanel().createGenerationLabel("Generation: " + model.getPopulation().getGeneration());
                     }
                     updateVisualization();
+                    createSimulationTimer();
                 }
             }
         }
