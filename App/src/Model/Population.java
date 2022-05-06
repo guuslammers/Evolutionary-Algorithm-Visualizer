@@ -22,7 +22,7 @@ public class Population {
         Creates a new population.
         */
         for(int i = 0; i < this.population.length; i++) {
-            this.population[i] = new Entity(startPosition, false);
+            this.population[i] = new Entity(startPosition.copy(), false);
         }
     }
 
@@ -124,7 +124,7 @@ public class Population {
         /*
         Creates a new Entity with a cloned copy of the parents brain.
         */
-        Entity child = new Entity(this.startPosition, bestEntity);
+        Entity child = new Entity(this.startPosition.copy(), bestEntity);
         child.cloneBrainDirectionsFrom(parent.getBrain());
         return child;
     }

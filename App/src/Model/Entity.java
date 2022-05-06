@@ -62,11 +62,7 @@ public class Entity implements ICircle {
         /*
         Returns true if the entity is alive, false otherwise.
         */
-        if(this.alive) {
-            return true;
-        }
-
-        return false;
+        return this.alive;
     }
 
     public boolean isBestEntity() {

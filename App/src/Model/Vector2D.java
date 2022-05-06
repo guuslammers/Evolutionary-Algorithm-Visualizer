@@ -55,6 +55,10 @@ public class Vector2D {
         return Math.sqrt(Math.pow((this.x - vector.getX()), 2) + Math.pow((this.y - vector.getY()), 2));
     }
 
+    public Vector2D copy() {
+        return new Vector2D(this.x, this.y);
+    }
+
     public double getX() {
         return this.x;
     }

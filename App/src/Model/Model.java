@@ -8,7 +8,7 @@ public class Model {
     Integer WINDOW_WIDTH;
     Integer WINDOW_HEIGHT;
 
-    Integer populationSize = 50;
+    Integer populationSize = 20;
     Population population;
     
     double startPositionRadius = 5;
