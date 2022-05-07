@@ -12,7 +12,7 @@ public class Population {
     Population(Vector2D startPosition, int populationSize) {
         this.startPosition = startPosition;
         this.population = new Entity[populationSize];
-        this.generation = 0;
+        this.generation = 1;
 
         createPopulation();
     }
@@ -28,10 +28,10 @@ public class Population {
 
     public void updatePopulation() {
         /*
-        Updates the entire population by moving all the alive Entities.
+        Updates the entire population by moving all the alive Entities that have not reached the goal.
         */
         for(Entity entity : population) {
-            if(entity.isAlive()) {
+            if(entity.isAlive() && !entity.hasReachedGoal()) {
                 entity.move();
             }
         }
@@ -78,6 +78,8 @@ public class Population {
         newPopulation[newPopulation.length - 1] = getChildEntity(this.bestEntity, true);
         // overwrite population with new generation.
         this.population = newPopulation;
+        // increment generation
+        this.generation++;
     }
 
     public void mutate() {

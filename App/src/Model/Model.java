@@ -38,6 +38,7 @@ public class Model {
                 // Check if entity collided with the goal.
                 if(circleCollide(entity, this.goal)) {
                     entity.setGoalReached();
+                    entity.killEntity();
                     continue;
                 }
                 // Check if entity collided with a wall.

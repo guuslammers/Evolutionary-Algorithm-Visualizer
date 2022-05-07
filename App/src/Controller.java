@@ -69,7 +69,7 @@ public class Controller {
                 this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.green));
             }
             else if(circle instanceof Entity) {
-                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.pink));
+                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.gray));
             }
         }
         // update generation label
@@ -86,6 +86,8 @@ public class Controller {
                 try {
                     model.updateSimulation();
                     updateVisualization();
+                    String generationLabel = "Generation: " + Integer.toString(model.getPopulation().getGeneration());
+                    view.getVisualizationPanel().setGenerationLabel(generationLabel);
                     
                 } catch (Exception e) {
                     e.printStackTrace();

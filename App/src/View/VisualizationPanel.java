@@ -64,6 +64,10 @@ public class VisualizationPanel extends JPanel {
         this.add(this.generationLabel, BorderLayout.CENTER);
     }
 
+    public void setGenerationLabel(String currentGeneration) {
+        this.generationLabel.setText(currentGeneration);
+    }
+
     public void clearGenerationLabel() {
         this.remove(this.generationLabel);
     }

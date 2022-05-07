@@ -72,6 +72,13 @@ public class Entity implements ICircle {
         return this.bestEntity;
     }
 
+    public boolean hasReachedGoal() {
+        /*
+        Returns true if the entity has reached the goal
+        */
+        return this.goalReached;
+    }
+
     public void cloneBrainDirectionsFrom(Brain brain) {
         /*
         Clones the passed in brain's accelerationDirections into this entities brain's accelerationDirections.
