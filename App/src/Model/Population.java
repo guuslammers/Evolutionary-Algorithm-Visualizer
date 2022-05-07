@@ -31,7 +31,7 @@ public class Population {
         Updates the entire population by moving all the alive Entities that have not reached the goal.
         */
         for(Entity entity : population) {
-            if(entity.isAlive() && !entity.hasReachedGoal()) {
+            if(entity.isAlive()) {
                 entity.move();
             }
         }

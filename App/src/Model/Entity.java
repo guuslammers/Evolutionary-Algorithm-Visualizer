@@ -9,7 +9,6 @@ public class Entity implements ICircle {
     boolean bestEntity;
     boolean alive;
     double fitness;
-    boolean goalReached;
 
     public Entity(Vector2D startPosition, boolean bestEntity) {
         this.brain = new Brain(1000);
@@ -19,7 +18,6 @@ public class Entity implements ICircle {
         this.bestEntity = bestEntity;
         this.alive = true;
         this.fitness = 0;
-        this.goalReached = false;
     }
 
     public void move() {
@@ -72,13 +70,6 @@ public class Entity implements ICircle {
         return this.bestEntity;
     }
 
-    public boolean hasReachedGoal() {
-        /*
-        Returns true if the entity has reached the goal
-        */
-        return this.goalReached;
-    }
-
     public void cloneBrainDirectionsFrom(Brain brain) {
         /*
         Clones the passed in brain's accelerationDirections into this entities brain's accelerationDirections.
@@ -100,10 +91,6 @@ public class Entity implements ICircle {
 
     public Double getRadius() {
         return this.ENTITY_RADIUS;
-    }
-    
-    public void setGoalReached() {
-        this.goalReached = true;
     }
 
 }
