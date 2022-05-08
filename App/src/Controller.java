@@ -42,6 +42,7 @@ public class Controller {
 
         this.view.getNavigationPanel().addStartButtonListener(new StartButtonListener());
         this.view.getNavigationPanel().addRestartButtonListener(new RestartButtonListener());
+        this.view.getNavigationPanel().addSkipButtonListener(new SkipButtonListener());
         
         this.view.getVisualizationPanel().addMouseListener(new MyMouseListener());
         this.view.getVisualizationPanel().addMouseMotionListener(new MyMouseMotionListener());
@@ -69,7 +70,12 @@ public class Controller {
                 this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.green));
             }
             else if(circle instanceof Entity) {
-                this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.gray));
+                Entity entity = (Entity)circle;
+                if(entity.isBestEntity()) {
+                    this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.orange));
+                } else {
+                    this.view.getVisualizationPanel().addCircle(new Circle2D(circle.getPosition().getX(), circle.getPosition().getY(), circle.getRadius(), Color.gray));
+                }
             }
         }
         // update generation label
@@ -106,20 +112,23 @@ public class Controller {
             if(running) {
                 view.getNavigationPanel().enableRestartButton();
                 view.getNavigationPanel().changeToStartButton();
-                running = false;
+                view.getNavigationPanel().disableSkipButton();
                 timer.cancel();
+                running = false;
             }
             else {
                 if(model.getStartPosition() != null && model.getGoal() != null) {
                     view.getNavigationPanel().disableRestartButton();
                     view.getNavigationPanel().changeToStopButton();
-                    running = true;
+                    view.getNavigationPanel().enableSkipButton();
+                    // create population if it doesn't exist
                     if(model.getPopulation() == null) {
                         model.createNewPopulation();
                         view.getVisualizationPanel().createGenerationLabel("Generation: " + model.getPopulation().getGeneration());
                     }
                     updateVisualization();
                     createSimulationTimer();
+                    running = true;
                 }
             }
         }
@@ -138,6 +147,26 @@ public class Controller {
             model.clearObstacles();
             view.getVisualizationPanel().clearGenerationLabel();
             updateVisualization();
+        }
+
+    }
+
+    class SkipButtonListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            /*
+            Skips 10 generations in the simulation.
+            */
+            view.getNavigationPanel().disableSkipButton();
+            int currentGeneration = model.getPopulation().getGeneration();
+            while(true) {
+                model.updateSimulation();
+                if(model.getPopulation().getGeneration() - currentGeneration >= 10) {
+                    model.updateSimulation();
+                    break;
+                }
+            }
+            view.getNavigationPanel().enableSkipButton();
         }
 
     }
