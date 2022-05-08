@@ -74,6 +74,7 @@ public class Population {
             newPopulation[i] = getChildEntity(parent, false);
         }
         // Find and add best entity.
+        this.bestEntity = null;
         this.setBestEntity();
         newPopulation[newPopulation.length - 1] = getChildEntity(this.bestEntity, true);
         // overwrite population with new generation.

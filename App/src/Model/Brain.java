@@ -55,6 +55,10 @@ public class Brain {
         this.step++;
     }
 
+    public int getStep() {
+        return this.step;
+    }
+
     public boolean accelerationDirectionsAvailable() {
         /*
         Returns true if there are accelerationDirections left in the brain.
