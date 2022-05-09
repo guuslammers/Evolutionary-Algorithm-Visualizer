@@ -37,6 +37,7 @@ public class Model {
             if(entity.isAlive()) {
                 // Check if entity collided with the goal.
                 if(circleCollide(entity, this.goal)) {
+                    entity.setGoalReached();
                     entity.killEntity();
                     continue;
                 }

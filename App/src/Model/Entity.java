@@ -6,6 +6,7 @@ public class Entity implements ICircle {
 
     Brain brain;
     Vector2D position, velocity, acceleration;
+    boolean goalReached;
     boolean bestEntity;
     boolean alive;
     double fitness;
@@ -15,6 +16,7 @@ public class Entity implements ICircle {
         this.position = startPosition;
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
+        this.goalReached = false;
         this.bestEntity = bestEntity;
         this.alive = true;
         this.fitness = 0;
@@ -91,6 +93,14 @@ public class Entity implements ICircle {
 
     public Double getRadius() {
         return this.ENTITY_RADIUS;
+    }
+
+    public void setGoalReached() {
+        this.goalReached = true;
+    }
+
+    public boolean getGoalReached() {
+        return this.goalReached;
     }
 
 }

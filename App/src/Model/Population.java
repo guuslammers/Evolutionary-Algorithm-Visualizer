@@ -1,4 +1,6 @@
 package Model;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Population {
@@ -134,18 +136,38 @@ public class Population {
 
     private void setBestEntity() {
         /*
-        Sets the best Entity in the population.
+        Sets the best Entity in the population. If multiple entities have reached the goal, then it
+        chooses the entity that got there the fastest.
         */
         int bestIndex = 0;
         double bestFitness = 0;
+        List<Entity> entities = new ArrayList<Entity>();
         for(int i = 0; i < this.population.length; i++) {
+            // check to find entity with the highest fiteness
             if(this.population[i].getFitness() > bestFitness) {
                 bestIndex = i;
                 bestFitness = this.population[i].getFitness();
             }
+            // check for if the entity reached the goal
+            if(this.population[i].getGoalReached()) {
+                entities.add(this.population[i]);
+            }
         }
 
-        this.bestEntity = this.population[bestIndex];
+        // if more then one entity reached the goal select theone that got there the fastest.
+        int steps = Integer.MAX_VALUE;
+        if(entities.size() > 1) {
+            for(Entity entity : entities) {
+                if(entity.getBrain().getStep() < steps) {
+                    this.bestEntity = entity;
+                    steps = entity.getBrain().getStep();
+                }
+                System.out.println(entity.getBrain().getStep());
+            }
+            System.out.println("\n");
+        } else {
+            this.bestEntity = this.population[bestIndex];
+        }
     }
 
     public int getGeneration() {
