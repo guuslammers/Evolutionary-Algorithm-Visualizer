@@ -158,6 +158,7 @@ public class Controller {
             Skips 10 generations in the simulation.
             */
             view.getNavigationPanel().disableSkipButton();
+            timer.cancel();
             int currentGeneration = model.getPopulation().getGeneration();
             while(true) {
                 model.updateSimulation();
@@ -166,6 +167,7 @@ public class Controller {
                     break;
                 }
             }
+            createSimulationTimer();
             view.getNavigationPanel().enableSkipButton();
         }
 

@@ -166,10 +166,6 @@ public class Population {
         } else {
             this.bestEntity = this.population[bestIndex];
         }
-        // catching unknown bug for the time being
-        if(bestFitness == 0.0) {
-            this.bestEntity = previousBestEntity;
-        }
     }
 
     public int getGeneration() {
