@@ -76,7 +76,6 @@ public class Population {
             newPopulation[i] = getChildEntity(parent, false);
         }
         // Find and add best entity.
-        this.bestEntity = null;
         this.setBestEntity();
         newPopulation[newPopulation.length - 1] = getChildEntity(this.bestEntity, true);
         // overwrite population with new generation.
@@ -141,6 +140,7 @@ public class Population {
         */
         int bestIndex = 0;
         double bestFitness = 0;
+        Entity previousBestEntity = this.bestEntity;
         List<Entity> entities = new ArrayList<Entity>();
         for(int i = 0; i < this.population.length; i++) {
             // check to find entity with the highest fiteness
@@ -162,11 +162,13 @@ public class Population {
                     this.bestEntity = entity;
                     steps = entity.getBrain().getStep();
                 }
-                System.out.println(entity.getBrain().getStep());
             }
-            System.out.println("\n");
         } else {
             this.bestEntity = this.population[bestIndex];
+        }
+        // catching unknown bug for the time being
+        if(bestFitness == 0.0) {
+            this.bestEntity = previousBestEntity;
         }
     }
 
