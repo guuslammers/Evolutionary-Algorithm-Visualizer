@@ -10,7 +10,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +24,7 @@ public class VisualizationPanel extends JPanel {
     
     VisualizationPanel() {
         circles = new ArrayList<Circle2D>();
+        this.setLayout(new GridLayout(14, 1));
     }
 
     public void paintComponent(Graphics g) {
@@ -62,7 +63,7 @@ public class VisualizationPanel extends JPanel {
         this.generationLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 25));
         this.generationLabel.setHorizontalAlignment(JLabel.CENTER);
         this.generationLabel.setVerticalAlignment(JLabel.CENTER);
-        this.add(this.generationLabel, BorderLayout.CENTER);
+        this.add(this.generationLabel);
     }
 
     public void setGenerationLabel(String currentGeneration) {
@@ -78,7 +79,7 @@ public class VisualizationPanel extends JPanel {
         this.bestEntityStepsTakenLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 25));
         this.bestEntityStepsTakenLabel.setHorizontalAlignment(JLabel.CENTER);
         this.bestEntityStepsTakenLabel.setVerticalAlignment(JLabel.CENTER);
-        this.add(this.bestEntityStepsTakenLabel, BorderLayout.SOUTH);
+        this.add(this.bestEntityStepsTakenLabel);
     }
 
     public void setBestEntityStepsTakenLabel(String currentSteps) {
