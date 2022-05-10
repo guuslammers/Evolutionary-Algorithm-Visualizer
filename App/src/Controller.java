@@ -78,8 +78,6 @@ public class Controller {
                 }
             }
         }
-        // update generation label
-
         // redraw window
         this.view.getVisualizationPanel().refreshPanel();
     }
