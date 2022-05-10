@@ -140,7 +140,6 @@ public class Population {
         */
         int bestIndex = 0;
         double bestFitness = 0;
-        Entity previousBestEntity = this.bestEntity;
         List<Entity> entities = new ArrayList<Entity>();
         for(int i = 0; i < this.population.length; i++) {
             // check to find entity with the highest fiteness
@@ -170,6 +169,10 @@ public class Population {
 
     public int getGeneration() {
         return this.generation;
+    }
+
+    public Entity getBestEntity() {
+        return this.bestEntity;
     }
 
     private double generateRandomDoubleInRange(double min, double max) {

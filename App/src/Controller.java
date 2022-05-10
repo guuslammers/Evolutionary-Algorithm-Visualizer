@@ -94,7 +94,10 @@ public class Controller {
                     updateVisualization();
                     String generationLabel = "Generation: " + Integer.toString(model.getPopulation().getGeneration());
                     view.getVisualizationPanel().setGenerationLabel(generationLabel);
-                    
+                    if(model.getPopulation().getBestEntity() != null) {
+                        String stepsLabel = "Steps Taken: " + Integer.toString(model.getPopulation().getBestEntity().getBrain().getStep());
+                        view.getVisualizationPanel().setBestEntityStepsTakenLabel(stepsLabel);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,6 +128,7 @@ public class Controller {
                     if(model.getPopulation() == null) {
                         model.createNewPopulation();
                         view.getVisualizationPanel().createGenerationLabel("Generation: " + model.getPopulation().getGeneration());
+                        view.getVisualizationPanel().createBestEntityStepsTakenLabel();
                     }
                     updateVisualization();
                     createSimulationTimer();
@@ -146,6 +150,7 @@ public class Controller {
             model.clearGoal();
             model.clearObstacles();
             view.getVisualizationPanel().clearGenerationLabel();
+            view.getVisualizationPanel().clearBestEntityStepsTakenLabel();
             updateVisualization();
         }
 

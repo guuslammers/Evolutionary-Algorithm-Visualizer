@@ -20,6 +20,7 @@ public class VisualizationPanel extends JPanel {
     List<Circle2D> circles;
 
     JLabel generationLabel;
+    JLabel bestEntityStepsTakenLabel;
     
     VisualizationPanel() {
         circles = new ArrayList<Circle2D>();
@@ -70,6 +71,22 @@ public class VisualizationPanel extends JPanel {
 
     public void clearGenerationLabel() {
         this.remove(this.generationLabel);
+    }
+
+    public void createBestEntityStepsTakenLabel() {
+        this.bestEntityStepsTakenLabel = new JLabel("Steps Taken: N/A");
+        this.bestEntityStepsTakenLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 25));
+        this.bestEntityStepsTakenLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.bestEntityStepsTakenLabel.setVerticalAlignment(JLabel.CENTER);
+        this.add(this.bestEntityStepsTakenLabel, BorderLayout.SOUTH);
+    }
+
+    public void setBestEntityStepsTakenLabel(String currentSteps) {
+        this.bestEntityStepsTakenLabel.setText(currentSteps);
+    }
+
+    public void clearBestEntityStepsTakenLabel() {
+        this.remove(this.bestEntityStepsTakenLabel);
     }
 
     public void addMyMouseListener(MouseAdapter mouseListener) {
