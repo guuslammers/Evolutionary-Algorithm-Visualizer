@@ -3,8 +3,8 @@ import View.View;
 
 public class App {
     
-    static int WINDOW_WIDTH = 1000;
-    static int WINDOW_HEIGHT = 500;
+    final static int WINDOW_WIDTH = 1000;
+    final static int WINDOW_HEIGHT = 500;
 
     public static void main(String[] args) throws Exception {
         Model model = new Model(WINDOW_WIDTH, WINDOW_HEIGHT);    
@@ -13,5 +13,4 @@ public class App {
 
         view.setVisible(true);
     }
-
 }
